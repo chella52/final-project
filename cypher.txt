@@ -1,0 +1,19 @@
+LOAD CSV WITH HEADERS FROM 'https://raw.githubusercontent.com/chella52/projectcsv/main/100000%20Sales%20Records.csv' AS row
+WITH row
+LIMIT 50000   // Adjust this number according to the total number of rows in your CSV file
+CREATE (:Sale {
+    region: row.Region,
+    country: row.Country,
+    itemType: row.`Item Type`,
+    salesChannel: row.`Sales Channel`,
+    orderPriority: row.`Order Priority`,
+    orderDate: row.`Order Date`,
+    orderID: row.`Order ID`,
+    shipDate: row.`Ship Date`,
+    unitsSold: toInteger(row.`Units Sold`),
+    unitPrice: toFloat(row.`Unit Price`),
+    unitCost: toFloat(row.`Unit Cost`),
+    totalRevenue: toFloat(row.`Total Revenue`),
+    totalCost: toFloat(row.`Total Cost`),
+    totalProfit: toFloat(row.`Total Profit`)
+});
